@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <input type="text" v-model="q">
+  <div class="page">
+    <input type="text" v-model="q" maxlength="2">
     <div>
-      <button @click="setText">
+      <button @click="goView">
         go
       </button>
     </div>
@@ -14,9 +14,9 @@ const router = useRouter()
 
 const q = ref('')
 
-const setText = () => {
-  router.push({
-    name: 's',
+const goView = () => {
+  return router.push({
+    name: 's-q',
     params: {
       q: encodeURIComponent(q.value)
     }
@@ -24,3 +24,27 @@ const setText = () => {
 }
 
 </script>
+
+<style scoped>
+.page {
+  display: flex;
+  flex: row nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100svh;
+}
+
+input {
+  outline: none;
+  border: 1px solid black;
+  padding: 0.5em 1em;
+  font-size: 18px;
+}
+
+button {
+  outline: none;
+  border: 1px solid black;
+  padding: 0.5em 1em;
+  font-size: 18px;
+}
+</style>

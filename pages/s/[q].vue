@@ -1,9 +1,11 @@
 <template>
   <div class="page">
-    {{ q }}
-    <button class="fullscreen-button" @click="onFullscreen">
-      full
-    </button>
+    <div class="container">
+      {{ q }}
+    </div>
+    <NuxtLink class="back-button" :to="{name: 'index'}">
+      back
+    </NuxtLink>
   </div>
 </template>
 
@@ -55,24 +57,26 @@ onBeforeUnmount(async () => {
 </script>
 
 <style scoped>
-.page {
+.container {
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   text-orientation: upright;
-  height: 100vh;
+  height: 100svh;
   margin: 0 auto;
   text-align: center;
   font-size: 50vw;
   letter-spacing: 10vw;
 }
 
-.fullscreen-button {
+.back-button {
   position: fixed;
   outline: none;
   border: none;
   background-color: transparent;
+  text-decoration: none;
+  color: darkgray;
   font-size: 12px;
-  top:1em;
+  top: 1em;
   left: 1em;
 }
 </style>
