@@ -4,7 +4,7 @@
       {{ q }}
     </div>
     <NuxtLink class="back-button" :to="{name: 'index'}">
-      back
+      Back
     </NuxtLink>
   </div>
 </template>
@@ -78,5 +78,12 @@ onBeforeUnmount(async () => {
   font-size: 12px;
   top: 1em;
   left: 1em;
+}
+
+@media screen and (min-width: 600px) {
+  .container {
+    font-size: 30vh;
+    letter-spacing: 10vh;
+  }
 }
 </style>
