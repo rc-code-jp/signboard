@@ -1,23 +1,32 @@
 <template>
   <div class="page">
-    <div class="container">
+    <div ref="$container" class="container">
       {{ q }}
     </div>
     <NuxtLink class="back-button" :to="{name: 'index'}">
-      Back
+      <img src="@/assets/images/back.svg" alt="Rotate">
     </NuxtLink>
+    <a href="#" class="rotate-button" @click.prevent="rotate">
+      <img src="@/assets/images/rotate.svg" alt="Rotate">
+    </a>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount, onMounted } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 const route = useRoute()
 
 const q = decodeURIComponent(String(route.params.q))
 
-const onFullscreen = () => {
-  document.body.requestFullscreen();	
+const $container = ref<HTMLDivElement>()
+
+const rotate = () => {
+  if ($container.value?.style.getPropertyValue('rotate') === '180deg') {
+    $container.value?.style.removeProperty('rotate')
+  } else {
+    $container.value?.style.setProperty('rotate', '180deg')
+  }
 }
 
 const wakeOn = async () => {
@@ -53,6 +62,8 @@ onBeforeUnmount(async () => {
   }
 
   console.dir(wakeLock)
+
+  $container.value?.style.removeProperty('rotate')
 })
 </script>
 
@@ -66,18 +77,35 @@ onBeforeUnmount(async () => {
   text-align: center;
   font-size: 50vw;
   letter-spacing: 10vw;
+  transition: rotate 0.3s ease;
 }
 
 .back-button {
+  display: flex;
   position: fixed;
   outline: none;
   border: none;
   background-color: transparent;
   text-decoration: none;
   color: darkgray;
-  font-size: 12px;
-  top: 1em;
+  width: 1em;
+  height: 1em;
+  top: 0.75em;
   left: 1em;
+}
+
+.rotate-button {
+  display: flex;
+  position: fixed;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  text-decoration: none;
+  color: darkgray;
+  width: 1em;
+  height: 1em;
+  top: 0.75em;
+  right: 1em;
 }
 
 @media screen and (min-width: 600px) {

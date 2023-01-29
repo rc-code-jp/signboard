@@ -10,4 +10,9 @@ body {
   color: black;
   background-color: white;
 }
+
+img {
+  width: 100%;
+  max-width: 100%;
+}
 </style>
